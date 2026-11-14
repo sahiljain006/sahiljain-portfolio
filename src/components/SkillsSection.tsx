@@ -263,14 +263,7 @@ export const SkillsSection: React.FC = () => {
       </p>
 
       {/* 2x2 Clean Grid for the 4 Dedicated Categories */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '24px',
-          marginTop: '48px',
-        }}
-      >
+      <div className="skills-grid-4">
         {SITE.skills.map((cat: SkillCategory, i: number) => (
           <div
             key={i}

@@ -8,7 +8,6 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
   }, []);
 
   const navItems = [
+    { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'skills', label: 'Skills' },
     { id: 'projects', label: 'Projects' },
@@ -29,7 +29,6 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    setMobileMenuOpen(false);
     onNavigate(id);
   };
 
@@ -68,29 +67,6 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
             <span className="nav-cta-dot" />
             Available for Work
           </a>
-
-          <button
-            type="button"
-            className="nav-mobile-toggle"
-            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={mobileMenuOpen}
-            onClick={() => setMobileMenuOpen((prev) => !prev)}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-              {mobileMenuOpen ? (
-                <>
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </>
-              ) : (
-                <>
-                  <line x1="4" y1="7" x2="20" y2="7" />
-                  <line x1="4" y1="12" x2="20" y2="12" />
-                  <line x1="4" y1="17" x2="20" y2="17" />
-                </>
-              )}
-            </svg>
-          </button>
         </div>
 
         <div className="nav-socials">
@@ -139,42 +115,6 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
           </a>
         </div>
       </div>
-
-      {mobileMenuOpen && (
-        <div className="nav-mobile-drawer" role="menu">
-          <a
-            href="#home"
-            className={`nav-mobile-item ${activeSection === 'home' ? 'active' : ''}`}
-            onClick={(e) => handleLinkClick(e, 'home')}
-          >
-            Home
-          </a>
-          {navItems.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className={`nav-mobile-item ${activeSection === item.id ? 'active' : ''}`}
-              onClick={(e) => handleLinkClick(e, item.id)}
-            >
-              {item.label}
-            </a>
-          ))}
-          <a
-            href="#achievements"
-            className={`nav-mobile-item ${activeSection === 'achievements' ? 'active' : ''}`}
-            onClick={(e) => handleLinkClick(e, 'achievements')}
-          >
-            Awards
-          </a>
-          <a
-            href="#contact"
-            className={`nav-mobile-item ${activeSection === 'contact' ? 'active' : ''}`}
-            onClick={(e) => handleLinkClick(e, 'contact')}
-          >
-            Contact
-          </a>
-        </div>
-      )}
     </nav>
   );
 };
