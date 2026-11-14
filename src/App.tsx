@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { AuroraBackground } from './components/AuroraBackground';
 import { CustomCursor } from './components/CustomCursor';
 import { ScrollProgressBar } from './components/ScrollProgressBar';
@@ -135,6 +136,9 @@ export const App: React.FC = () => {
         type={lightboxType}
         certData={selectedCert}
       />
+
+      {/* Vercel Analytics */}
+      <Analytics />
     </>
   );
 };
